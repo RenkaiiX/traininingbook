@@ -14,8 +14,7 @@ const createNestServer = async (expressInstance) => {
   await app.init();
 };
 
-// Tunggu hingga createNestServer selesai
-await createNestServer(expressApp); 
-
-// Sekarang Anda dapat mengekspor handler dengan aman
-export const handler = serverlessExpress({ app: expressApp });
+(async () => {
+  await createNestServer(expressApp); 
+  module.exports.handler = serverlessExpress({ app: expressApp }); 
+})();
